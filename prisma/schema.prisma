@@ -18,4 +18,39 @@ model User {
   email String @unique
   name String?
   hash String
+  playerInfo PlayerInfo?
+}
+
+model Game {
+  hostId Int @id
+  maxPlayers Int
+  players PlayerInfo[]
+  hash String?
+  currentTurn Int? // if null, then the game hasn't started yet
+  currentRound Int?
+  trend Int[]
+
+  auctionedCards Card[] 
+  currentAuctionTurn Int? // 0 means the auctioneer's turn, 1 means the player after the auctioneer, etc., if null, then the auction hasn't started yet
+}
+
+model PlayerInfo {
+  user User @relation(fields: [id], references: [id])
+  id Int @id
+  turnOrder Int?
+  game Game @relation(fields: [gameId], references: [hostId], onDelete: Cascade)
+  gameId Int
+  money Int?
+  bid Int?
+  cards Card[]
+}
+
+model Card {
+  id Int @id @default(autoincrement())
+  owner PlayerInfo @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId Int
+  isPainting Boolean?
+
+  auctionedIn Game? @relation(fields: [auctionedInId], references: [hostId], onDelete: Cascade)
+  auctionedInId Int? @unique
 }
