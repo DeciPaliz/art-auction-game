@@ -1,1 +1,2 @@
-export const SignIn = () => <div>sign in</div>;
+const SignIn = () => <div>sign in</div>;
+export default SignIn;

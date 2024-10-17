@@ -1,1 +1,2 @@
-export const Join = () => <div>join</div>;
+const Join = () => <div>join</div>;
+export default Join;

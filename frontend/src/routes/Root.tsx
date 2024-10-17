@@ -1,1 +1,2 @@
-export const Root = () => <div>root</div>;
+const Root = () => <div>root</div>;
+export default Root;

@@ -1,1 +1,2 @@
-export const Play = () => <div>play</div>;
+const Play = () => <div>play</div>;
+export default Play;
