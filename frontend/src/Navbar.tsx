@@ -5,10 +5,12 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
 export const Navbar = () => {
+  const location = useLocation();
+
   return (
     <Navbar_
       className="app-navbar"
@@ -23,24 +25,33 @@ export const Navbar = () => {
       </NavbarBrand>
       <Nav navbar className="me-auto">
         <NavItem>
-          <NavLink tag={Link} to="/join">
+          <NavLink active={location.pathname === '/join'} tag={Link} to="/join">
             Join
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} to="/play">
+          <NavLink active={location.pathname === '/play'} tag={Link} to="/play">
             Play
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} to="/upload">
+          <NavLink
+            active={location.pathname === '/upload'}
+            tag={Link}
+            to="/upload"
+          >
             Upload
           </NavLink>
         </NavItem>
       </Nav>
       <Nav navbar>
         <NavItem>
-          <NavLink tag={Link} to="/signin" className="ml-auto">
+          <NavLink
+            active={location.pathname === '/signin'}
+            tag={Link}
+            to="/signin"
+            className="ml-auto"
+          >
             Sign In
           </NavLink>
         </NavItem>
