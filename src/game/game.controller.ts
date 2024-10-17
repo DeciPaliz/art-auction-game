@@ -15,7 +15,7 @@ import { JwtGuard } from 'src/auth/jwt-guard.service';
 import { GetUser } from 'src/decorator/get-user';
 import { JoinGameDto } from './dto/join-game.dto';
 
-@Controller('games')
+@Controller('api/games')
 export class GameController {
   constructor(private game: GameService) {}
 

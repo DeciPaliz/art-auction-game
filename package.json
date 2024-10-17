@@ -9,7 +9,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
-    "start:dev:frontend": "(cd frontend; yarn watch)",
+    "start:dev:frontend": "(cd frontend; yarn dev)",
     "start:dev:db": "docker compose -f docker-compose.dev.yml up",
     "start:dev:watch": "nest start --watch",
     "start:dev": "dotenv -e .env.development -- concurrently \"yarn start:dev:db\" \"yarn start:dev:watch\" \"yarn start:dev:frontend\"",
