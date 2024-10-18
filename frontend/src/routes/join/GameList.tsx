@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { useJoinContext } from '../../contexts/Join.context';
 import { useEmitterOn } from '../../util/events';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './GameList.css';
 import { gamesList, GamesListResult } from '../../api';
 
@@ -30,6 +30,10 @@ export const GameList = () => {
       ee.emit('refreshed');
     },
   );
+
+  useEffect(() => {
+    ee.emit('refresh', { showPassword: true });
+  }, []);
 
   return (
     <div className="game-list">

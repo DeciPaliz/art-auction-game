@@ -12,7 +12,7 @@ export const useEmitterOn = (
     return () => {
       ee.off(eventName, listener);
     };
-  });
+  }, []);
 };
 
 export const useEmitterOnce = (
@@ -26,5 +26,5 @@ export const useEmitterOnce = (
     return () => {
       ee.off(eventName, listener);
     };
-  });
+  }, []);
 };
