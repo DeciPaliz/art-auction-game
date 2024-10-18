@@ -9,19 +9,23 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { GameService } from './game.service';
-import { ListGamesDto } from './dto/list-games.dto';
 import { CreateGameDto } from './dto/create-game.dto';
 import { JwtGuard } from 'src/auth/jwt-guard.service';
 import { GetUser } from 'src/decorator/get-user';
 import { JoinGameDto } from './dto/join-game.dto';
+import { QuerySwitch } from 'src/decorator/query-switch';
 
 @Controller('api/games')
 export class GameController {
   constructor(private game: GameService) {}
 
   @Get('list')
-  async listGames(@Body() dto: ListGamesDto) {
-    return this.game.listGames(dto);
+  async listGames(
+    @QuerySwitch('noPassword') noPassword: boolean,
+    @QuerySwitch('started') started: boolean,
+    @QuerySwitch('unavailable') unavailable: boolean,
+  ) {
+    return this.game.listGames(noPassword, started, unavailable);
   }
 
   @UseGuards(JwtGuard)

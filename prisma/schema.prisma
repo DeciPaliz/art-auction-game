@@ -19,10 +19,12 @@ model User {
   name String?
   hash String
   playerInfo PlayerInfo?
+  hostingGame Game?
 }
 
 model Game {
   hostId Int @id
+  host User @relation(references: [id], fields: [hostId])
   maxPlayers Int
   players PlayerInfo[]
   hash String?

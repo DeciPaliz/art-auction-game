@@ -1,5 +1,4 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { ListGamesDto } from './dto/list-games.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Game, Prisma } from '@prisma/client';
 import { CreateGameDto } from './dto/create-game.dto';
@@ -10,22 +9,25 @@ import { JoinGameDto } from './dto/join-game.dto';
 @Injectable()
 export class GameService {
   constructor(private prisma: PrismaService) {}
-  async listGames(dto: ListGamesDto) {
+  async listGames(noPassword: boolean, started: boolean, unavailable: boolean) {
     const where: Prisma.GameWhereInput = {
       currentTurn: null,
     };
-    if (dto.noPassword) {
+    if (noPassword) {
       where.hash = null;
     }
-    if (dto.started) {
+    if (started) {
       delete where.currentTurn;
     }
     let games = await this.prisma.game.findMany({
       where,
-      include: { players: { select: { id: true } } },
+      include: {
+        players: { select: { id: true } },
+        host: { select: { name: true } },
+      },
     });
 
-    if (!dto.unavailable) {
+    if (!unavailable) {
       games = games.filter((game) => game.players.length !== game.maxPlayers);
     }
 
@@ -108,13 +110,33 @@ export class GameService {
     });
   }
 
-  gamePublicTransformer(game: Game & { players: ({ id: number } & any)[] }) {
-    return {
+  gamePublicTransformer(
+    game: Game & {
+      players?: ({ id: number } & any)[];
+      host?: { name: string };
+    },
+  ) {
+    type PublicGame = {
+      hostId: number;
+      maxPlayers: number;
+      players: number[];
+      started: boolean;
+      password: boolean;
+      name?: string;
+    };
+
+    const publicGame: PublicGame = {
       hostId: game.hostId,
       maxPlayers: game.maxPlayers,
       players: game.players.map(({ id }) => id),
       started: game.currentTurn !== null,
       password: game.hash !== null,
     };
+
+    if (game.host) {
+      publicGame.name = game.host.name;
+    }
+
+    return publicGame;
   }
 }
