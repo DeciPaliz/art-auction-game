@@ -23,7 +23,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prisma:studio": "dotenv -e .env.development -- prisma studio",
     "prisma:migrate": "dotenv -e .env.development -- prisma migrate dev",
-    "db:populate": "dotenv -e .env.development -- node dist/private/populate-db.js"
+    "db:populate": "dotenv -e .env.development -- node dist/private/populate-db.js",
+    "db:wipe": "dotenv -e .env.development -- node dist/private/wipe-db.js"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
