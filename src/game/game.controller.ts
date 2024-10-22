@@ -4,16 +4,16 @@ import {
   Delete,
   Get,
   Post,
+  Query,
   UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { GameService } from './game.service';
 import { CreateGameDto } from './dto/create-game.dto';
-import { JwtGuard } from 'src/auth/jwt-guard.service';
+import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { GetUser } from 'src/decorator/get-user';
 import { JoinGameDto } from './dto/join-game.dto';
-import { QuerySwitch } from 'src/decorator/query-switch';
 
 @Controller('api/games')
 export class GameController {
@@ -21,11 +21,15 @@ export class GameController {
 
   @Get('list')
   async listGames(
-    @QuerySwitch('noPassword') noPassword: boolean,
-    @QuerySwitch('started') started: boolean,
-    @QuerySwitch('unavailable') unavailable: boolean,
+    @Query('noPassword') noPassword: string,
+    @Query('started') started: string,
+    @Query('unavailable') unavailable: string,
   ) {
-    return this.game.listGames(noPassword, started, unavailable);
+    return this.game.listGames(
+      noPassword === 'true',
+      started === 'true',
+      unavailable === 'true',
+    );
   }
 
   @UseGuards(JwtGuard)

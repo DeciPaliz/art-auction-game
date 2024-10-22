@@ -20,6 +20,7 @@ model User {
   hash String
   playerInfo PlayerInfo?
   hostingGame Game?
+  refreshTokens RefreshToken[]
 }
 
 model Game {
@@ -55,4 +56,11 @@ model Card {
 
   auctionedIn Game? @relation(fields: [auctionedInId], references: [hostId], onDelete: Cascade)
   auctionedInId Int? @unique
+}
+
+model RefreshToken {
+  token String @id
+  expiresAt DateTime
+  user User @relation(fields: [userId], references: [id])
+  userId Int @unique
 }

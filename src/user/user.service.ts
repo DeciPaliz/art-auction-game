@@ -15,4 +15,24 @@ export class UserService {
     delete user.hash;
     return user;
   }
+
+  async findUser(options: { email?: string; name?: string; id?: number }) {
+    if (options.email) {
+      return await this.prisma.user.findUnique({
+        where: { email: options.email },
+      });
+    }
+
+    if (options.name) {
+      return await this.prisma.user.findFirst({
+        where: { name: options.name },
+      });
+    }
+
+    if (options.id) {
+      return await this.prisma.user.findUnique({
+        where: { id: options.id },
+      });
+    }
+  }
 }
