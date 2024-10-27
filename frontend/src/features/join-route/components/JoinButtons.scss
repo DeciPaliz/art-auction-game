@@ -1,0 +1,33 @@
+.app-join-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.app-join-buttons-btn {
+  width: 6rem;
+  height: 2rem;
+}
+
+.app-join-buttons-btn-small {
+  width: 2rem;
+  height: 2rem;
+}
+
+.app-join-buttons-refresh-group {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5rem;
+}
+
+.app-join-buttons-options {
+  display: flex;
+  flex-direction: row;
+}
+
+.app-join-buttons-dialog {
+  inset: unset;
+  left: 9rem;
+}

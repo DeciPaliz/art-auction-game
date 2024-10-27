@@ -7,7 +7,6 @@ import {
   HttpStatus,
   InternalServerErrorException,
   Post,
-  Req,
   Res,
   UseGuards,
 } from '@nestjs/common';
@@ -17,7 +16,7 @@ import { GetUser } from 'src/decorator/get-user';
 import { User } from '@prisma/client';
 import { GetBearer } from 'src/decorator/get-bearer';
 import { RefreshTokenService } from './refresh-token.service';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { ConfigService } from 'src/config/config.service';
 
 @Controller('api/auth')
