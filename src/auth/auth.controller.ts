@@ -1,5 +1,6 @@
 import { AuthService } from './auth.service';
 import {
+  BadRequestException,
   Body,
   Controller,
   ForbiddenException,
@@ -29,17 +30,15 @@ export class AuthController {
   ) {}
 
   @Post('sign-up')
-  async signUp(
-    @Res({ passthrough: true }) response: Response,
-    @Body() dto: AuthDto,
-  ) {
-    const pair = await this.authService.signUp(dto);
-    response.cookie(
-      ConfigService.cookie.refresh.name,
-      pair.refresh_token,
-      ConfigService.cookie.refresh.options,
-    );
-    return { access_token: pair.access_token };
+  async signUp() {
+    throw new BadRequestException('signing up is temporarily disabled');
+    // const pair = await this.authService.signUp(dto);
+    // response.cookie(
+    //   ConfigService.cookie.refresh.name,
+    //   pair.refresh_token,
+    //   ConfigService.cookie.refresh.options,
+    // );
+    // return { access_token: pair.access_token };
   }
 
   @HttpCode(HttpStatus.OK)

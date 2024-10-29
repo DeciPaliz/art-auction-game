@@ -208,12 +208,18 @@ export const AuthModal = forwardRef(
       <dialog className="auth-modal" ref={ref}>
         <h1>{thisTitle}</h1>
         <form onSubmit={onSubmit}>
-          {accessToken === null ? signInAndUpContent : logOutContent}
+          {accessToken !== null ? (
+            logOutContent
+          ) : authState === 'signup' ? (
+            <>Signing up is temporarily disabled</>
+          ) : (
+            signInAndUpContent
+          )}
           {problemMessage !== '' && (
             <div className="auth-modal-problem">{problemMessage}</div>
           )}
           <div className="auth-modal-buttons">
-            {accessToken === null ? signInAndUpButtons : logOutButtons}
+            {accessToken !== null ? logOutButtons : signInAndUpButtons}
           </div>
         </form>
       </dialog>
