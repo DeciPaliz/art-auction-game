@@ -42,7 +42,7 @@ export class RefreshTokenService {
   }
 
   async isRefreshTokenBlacklisted(refreshToken: string, userId: number) {
-    const token = this.prisma.refreshToken.findFirst({
+    const token = await this.prisma.refreshToken.findFirst({
       where: { userId, token: refreshToken },
     });
     return token !== null;

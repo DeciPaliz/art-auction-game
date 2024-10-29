@@ -8,7 +8,10 @@ export const GameList = (props: {
   games?: Game[];
   error?: FetchBaseQueryError | SerializedError;
 }) => {
-  if (props.error) return <>{props.error}</>;
+  if (props.error) {
+    console.log(props.error);
+    return <>Server error</>;
+  }
   if (!props.games) return <></>;
 
   return (

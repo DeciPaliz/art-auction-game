@@ -6,17 +6,27 @@ export const apiSliceWithAuth = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     signUp: build.mutation<
       AccessTokenResult,
-      { email: string; password: string }
-    >({ query: (body) => ({ url: 'auth/sign-up', body }) }),
+      { email: string; name: string; password: string }
+    >({ query: (body) => ({ url: 'auth/sign-up', method: 'POST', body }) }),
 
     signIn: build.mutation<
       AccessTokenResult,
       { email: string; password: string }
-    >({ query: (body) => ({ url: 'auth/sign-in', body }) }),
+    >({ query: (body) => ({ url: 'auth/sign-in', method: 'POST', body }) }),
 
-    clear: build.mutation<void, void>({ query: () => 'auth/clear' }),
+    refresh: build.mutation<AccessTokenResult, void>({
+      query: () => ({ url: 'auth/refresh', method: 'POST' }),
+    }),
+
+    clear: build.mutation<void, void>({
+      query: () => ({ url: 'auth/clear', method: 'POST' }),
+    }),
   }),
 });
 
-export const { useSignUpMutation, useSignInMutation, useClearMutation } =
-  apiSliceWithAuth;
+export const {
+  useSignUpMutation,
+  useSignInMutation,
+  useRefreshMutation,
+  useClearMutation,
+} = apiSliceWithAuth;

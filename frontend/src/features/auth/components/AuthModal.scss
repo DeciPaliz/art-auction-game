@@ -1,0 +1,70 @@
+.auth-modal {
+  color: black;
+  border-radius: 0.5rem;
+  width: 13rem;
+
+  > h1 {
+    color: #333;
+    font-size: larger;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+
+  > form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  input {
+    border: solid #aaa 0.15rem;
+    text-align: center;
+    min-height: 1.5rem;
+    border-radius: 0.5rem;
+  }
+}
+
+.auth-modal-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0.3rem;
+
+  > button {
+    border: solid #aaa 0.15rem;
+    border-radius: 0.5rem;
+    min-width: 5rem;
+    min-height: 2rem;
+  }
+}
+
+.auth-modal-action {
+  background-color: lighten(cornflowerblue, 10);
+  &:hover {
+    background-color: lighten(cornflowerblue, 5);
+  }
+  &:active {
+    background-color: cornflowerblue;
+  }
+}
+
+.auth-modal-logout {
+  background-color: lighten(crimson, 5);
+  &:hover {
+    background-color: crimson;
+  }
+  &:active {
+    background-color: darken(crimson, 5);
+  }
+}
+
+.auth-modal-problem {
+  color: crimson;
+  text-align: center;
+}
+
+.auth-modal-problem-input {
+  border: solid crimson 5rem;
+  color: lighten(crimson, 10);
+}

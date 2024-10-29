@@ -14,11 +14,13 @@ import { AuthDto } from './auth.dto';
 import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 import { GetUser } from 'src/decorator/get-user';
 import { User } from '@prisma/client';
-import { GetBearer } from 'src/decorator/get-bearer';
 import { RefreshTokenService } from './refresh-token.service';
 import { Response } from 'express';
 import { ConfigService } from 'src/config/config.service';
+import { GetRefreshToken } from 'src/decorator/get-refresh-token';
+import { Throttle } from '@nestjs/throttler';
 
+@Throttle({ default: { ttl: 1000, limit: 1 } })
 @Controller('api/auth')
 export class AuthController {
   constructor(
@@ -55,14 +57,14 @@ export class AuthController {
   @Post('refresh')
   async refresh(
     @GetUser('attributes') attributes: User,
-    @GetBearer() bearer: string,
+    @GetRefreshToken() refreshToken: string,
     @GetUser('refreshTokenExpiresAt') refreshTokenExpiresAt: Date,
   ) {
     if (!attributes) throw new InternalServerErrorException();
-    if (!bearer) throw new ForbiddenException('invalid credentials');
+    if (!refreshToken) throw new ForbiddenException('invalid credentials');
     return this.refreshToken.generatePair(
       attributes,
-      bearer,
+      refreshToken,
       refreshTokenExpiresAt,
     );
   }

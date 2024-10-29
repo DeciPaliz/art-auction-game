@@ -6,6 +6,8 @@ import { GameModule } from './game/game.module';
 import { ConfigModule } from './config/config.module';
 import { ServerModule } from './server/server.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -15,6 +17,13 @@ import { ScheduleModule } from '@nestjs/schedule';
     AuthModule,
     GameModule,
     ScheduleModule.forRoot(),
+    ThrottlerModule.forRoot([
+      {
+        ttl: 10000,
+        limit: 20,
+      },
+    ]),
   ].concat(process.env.API_REAL_URL ? [] : [ServerModule]),
+  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
 export class AppModule {}
