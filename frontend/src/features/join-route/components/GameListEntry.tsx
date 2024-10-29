@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
-import { Game } from '../../../shared/api/games.api';
+import { Game } from '../../../shared/api/game.api';
 import './GameListEntry.scss';
 
 export const GameListEntry = (props: { game: Game }) => {

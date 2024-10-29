@@ -1,6 +1,6 @@
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
-import { Game } from '../../../shared/api/games.api';
+import { Game } from '../../../shared/api/game.api';
 import { GameListEntry } from './GameListEntry';
 import './GameList.scss';
 
