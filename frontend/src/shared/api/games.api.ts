@@ -1,5 +1,4 @@
-import { apiSlice } from '@shared/api/api.slice';
-import { GameListOptions } from '../store/join.slice';
+import { apiSlice } from './api.slice';
 
 export type Game = {
   hostId: number;
@@ -12,7 +11,14 @@ export type Game = {
 
 export const apiSliceWithGames = apiSlice.injectEndpoints({
   endpoints: (build) => ({
-    listGames: build.query<Game[], GameListOptions>({
+    listGames: build.query<
+      Game[],
+      {
+        noPassword: boolean;
+        started: boolean;
+        unavailable: boolean;
+      }
+    >({
       query: (body) => {
         return (
           'games/list?' +

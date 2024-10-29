@@ -1,13 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export type GameListOptions = {
-  noPassword: boolean;
-  started: boolean;
-  unavailable: boolean;
-};
-
 export interface JoinSlice {
-  gameListOptions: GameListOptions;
+  gameListOptions: {
+    noPassword: boolean;
+    started: boolean;
+    unavailable: boolean;
+  };
 }
 
 const initialState: JoinSlice = {

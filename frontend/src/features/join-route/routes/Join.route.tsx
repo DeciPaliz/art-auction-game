@@ -1,5 +1,5 @@
 import { useAppSelector } from '@/shared/hooks/store';
-import { useListGamesQuery } from '../api/games.api';
+import { useListGamesQuery } from '../../../shared/api/games.api';
 import { GameList } from '../components/GameList';
 import { JoinButtons } from '../components/JoinButtons';
 

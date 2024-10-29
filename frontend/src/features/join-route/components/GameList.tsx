@@ -1,6 +1,8 @@
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { Game } from '../api/games.api';
 import { SerializedError } from '@reduxjs/toolkit';
+import { Game } from '../../../shared/api/games.api';
+import { GameListEntry } from './GameListEntry';
+import './GameList.scss';
 
 export const GameList = (props: {
   games?: Game[];
@@ -10,12 +12,14 @@ export const GameList = (props: {
   if (!props.games) return <></>;
 
   return (
-    <>
+    <div className="game-list">
       <ul>
         {props.games?.map((game) => (
-          <li key={game.hostId}>{game.name}'s Game</li>
+          <li key={game.hostId}>
+            <GameListEntry game={game} />
+          </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };

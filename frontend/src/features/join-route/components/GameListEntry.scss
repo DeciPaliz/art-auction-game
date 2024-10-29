@@ -1,0 +1,59 @@
+.game-list-entry {
+  display: grid;
+  grid-template-areas: 'a b c';
+  justify-content: start;
+
+  div,
+  button {
+    min-height: 2rem;
+    background-color: white;
+    border: 0.2rem solid #ddd;
+    color: #333;
+  }
+
+  div {
+    line-height: 2rem;
+  }
+}
+
+.game-list-entry-name {
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  min-width: 15rem;
+  max-width: 15rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.game-list-entry-players {
+  border-left: none;
+  border-right: none;
+  width: 3rem;
+  text-align: center;
+}
+
+.game-list-entry-join {
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+
+  cursor: pointer;
+  &:hover {
+    background-color: #ddd;
+  }
+  &:active {
+    background-color: #bbb;
+  }
+  &:disabled {
+    cursor: default;
+    background-color: #ddd;
+  }
+}
