@@ -34,9 +34,11 @@ export class AuthController {
     @Body() dto: AuthDto,
   ) {
     const pair = await this.authService.signUp(dto);
-    response.cookie(ConfigService.cookie.refresh.name, pair.refresh_token, {
-      ...ConfigService.cookie.refresh.options,
-    });
+    response.cookie(
+      ConfigService.cookie.refresh.name,
+      pair.refresh_token,
+      ConfigService.cookie.refresh.options,
+    );
     return { access_token: pair.access_token };
   }
 
@@ -47,9 +49,11 @@ export class AuthController {
     @Body() dto: AuthDto,
   ) {
     const pair = await this.authService.signIn(dto);
-    response.cookie(ConfigService.cookie.refresh.name, pair.refresh_token, {
-      ...ConfigService.cookie.refresh.options,
-    });
+    response.cookie(
+      ConfigService.cookie.refresh.name,
+      pair.refresh_token,
+      ConfigService.cookie.refresh.options,
+    );
     return { access_token: pair.access_token };
   }
 

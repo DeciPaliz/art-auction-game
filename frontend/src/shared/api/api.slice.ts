@@ -15,6 +15,7 @@ const baseQuery = fetchBaseQuery({
     if (state.auth.accessToken)
       headers.set('Authorization', state.auth.accessToken);
   },
+  credentials: 'same-origin',
 });
 
 const baseQueryWithReauth: BaseQueryFn<
