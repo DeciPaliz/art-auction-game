@@ -123,7 +123,7 @@ export const AuthModal = forwardRef(
       }
       ref.current?.close();
       dispatch(setAccessToken(result.data.access_token));
-      dispatch(showNotification("You're logged in!"));
+      dispatch(showNotification("You're signed in!"));
     };
 
     const thisTitle =

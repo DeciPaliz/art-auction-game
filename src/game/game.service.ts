@@ -101,7 +101,7 @@ export class GameService {
     if (game.hash && !dto.password) {
       throw new ForbiddenException('a password is required');
     }
-    if (!(await argon.verify(game.hash, dto.password))) {
+    if (game.hash && !(await argon.verify(game.hash, dto.password))) {
       throw new ForbiddenException('invalid password');
     }
 

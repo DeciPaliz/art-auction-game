@@ -7,6 +7,7 @@ import './GameList.scss';
 export const GameList = (props: {
   games?: Game[];
   error?: FetchBaseQueryError | SerializedError;
+  askPassword: () => Promise<string>;
 }) => {
   if (props.error) {
     console.log(props.error);
@@ -19,7 +20,7 @@ export const GameList = (props: {
       <ul>
         {props.games?.map((game) => (
           <li key={game.hostId}>
-            <GameListEntry game={game} />
+            <GameListEntry game={game} askPassword={props.askPassword} />
           </li>
         ))}
       </ul>

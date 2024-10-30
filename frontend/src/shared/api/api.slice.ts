@@ -13,7 +13,7 @@ const baseQuery = fetchBaseQuery({
   prepareHeaders(headers, { getState }) {
     const state = getState() as RootState;
     if (state.auth.accessToken)
-      headers.set('Authorization', state.auth.accessToken);
+      headers.set('Authorization', `Bearer ${state.auth.accessToken}`);
   },
   credentials: 'same-origin',
 });
