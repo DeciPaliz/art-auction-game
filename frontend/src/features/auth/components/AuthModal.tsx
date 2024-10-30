@@ -18,6 +18,7 @@ import {
   useSignInMutation,
   useSignUpMutation,
 } from '@/shared/api/auth.api';
+import { showNotification } from '@/shared/store/notification.slice';
 
 export const AuthModal = forwardRef(
   (_props: object, forwardedRef: ForwardedRef<HTMLDialogElement>) => {
@@ -122,6 +123,7 @@ export const AuthModal = forwardRef(
       }
       ref.current?.close();
       dispatch(setAccessToken(result.data.access_token));
+      dispatch(showNotification("You're logged in!"));
     };
 
     const thisTitle =

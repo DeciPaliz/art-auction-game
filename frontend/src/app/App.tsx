@@ -6,6 +6,7 @@ import './App.scss';
 import { useClearMutation, useRefreshMutation } from '@/shared/api/auth.api';
 import { setAccessToken } from '@/shared/store/auth.slice';
 import { useAppDispatch } from '@/shared/hooks/store';
+import { Notification } from '@/shared/components/notification/Notification';
 
 const Root = lazy(() => import('@features/root-route/Root.route'));
 const Join = lazy(() => import('@features/join-route/routes/Join.route'));
@@ -38,6 +39,7 @@ export const App = () => {
   return (
     <>
       <Navbar />
+      <Notification />
       <div className="app-content">
         <Routes>
           <Route path="/">
